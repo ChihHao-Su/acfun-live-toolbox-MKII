@@ -33,6 +33,9 @@ export default defineComponent({
 	mounted() {
 		getClientRouter().then((routing) => {
 			// TODO: REFACTOR: ?????
+			// TODO: REFACTOR: 可见拓展了 RouteRecordRaw（hidden 是自定义字段），用
+			// 接口描述数据结构。
+			// TODO: Edit /src/router/clientRouter.ts.
 			this.routingToShow = routing.slice(2).filter((i) =>!i.hidden);
 		});
 	},
@@ -46,9 +49,7 @@ export default defineComponent({
 		footer,
 		common,
 		contents() {
-			// TODO: REFACTOR: 可见拓展了 RouteRecordRaw（hidden 是自定义字段），用
-			// 接口描述数据结构。
-			// TODO: Edit /src/router/clientRouter.ts.
+			
 			
 		}
 	},

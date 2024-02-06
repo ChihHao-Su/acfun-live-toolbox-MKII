@@ -1,8 +1,8 @@
 import { app, BrowserWindow, shell, protocol, globalShortcut } from "electron";
 import { release } from "node:os";
 import { join } from "node:path";
-import { MainWin, startHttp, Backend, File, KsApi, Voice, AppTest, Applets } from "../utils";
-import { isRunningInDevServer as isRunningUnderDevServer } from "../utils/sys";
+import { MainWin, startHttp, Backend, File, KsApi, Voice, AppTest, Applets } from "../subsystem";
+import { isRunningInDevServer as isRunningUnderDevServer } from "../sysUtils";
 
 // The built directory structure
 //
@@ -21,8 +21,6 @@ if (process.platform === "linux") {
 	app.commandLine.appendSwitch("enable-transparent-visuals");
 	app.commandLine.appendSwitch("disable-gpu");
 }
-
-const isDevelopment = process.env.VITE_DEV_SERVER_URL;
 
 // Disable GPU Acceleration for Windows 7
 if (release().startsWith("6.1")) app.disableHardwareAcceleration();
@@ -132,7 +130,7 @@ app.whenReady().then(() => {
 	createWindow();
 });
 
-if (isDevelopment || true) {
+if (isRunningUnderDevServer() || true) {
 	if (process.platform === "win32") {
 		process.on("message", (data) => {
 			if (data === "graceful-exit") {
